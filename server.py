@@ -33,6 +33,8 @@ def threaded_client(conn):
             conn.sendall(str.encode(reply))
         except:
             break
+    print('Either player disconnected or error happened')
+    conn.close()
 
 while True:
     conn, addr = s.accept()
