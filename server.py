@@ -16,11 +16,13 @@ try:
 except socket.error as e:
     print(str(e))
 
-
 s.listen(6)
 print('Server started')
 
+connection_id = 0
+
 def threaded_client(conn):
+    conn.send(str.encode(str(connection_id)))
     reply = ''
     while True:
         try:
@@ -41,3 +43,4 @@ while True:
     print('New player connected')
 
     _thread.start_new_thread(threaded_client, (conn,))
+    connection_id += 1
